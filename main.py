@@ -6,6 +6,7 @@ from urllib.parse import urljoin
 
 
 def scrape_categories(url):
+    # takes Homepage-URL and returns a Dictionary with the Category-Name as key, and the Link as value.
     category_links = {}
     while not category_links:
         try:
@@ -26,6 +27,7 @@ def scrape_categories(url):
 
 
 def scrape_products(category_url):
+    # takes a Category-URL and returns a list of all the product-Links from that category.
     product_urls = []
     while category_url != "":
         try:
@@ -52,6 +54,7 @@ def scrape_products(category_url):
 
 
 def scrape_details(product_url):
+    # takes a product-URL and returns a dictionary with all requested details.
     prod_details = {}
     while not prod_details:
         try:

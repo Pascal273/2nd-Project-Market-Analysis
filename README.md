@@ -1,4 +1,4 @@
-#Introduction
+# Introduction
 This is the 2nd project for the Python path of Openclassrooms. The goal is to web scrape from [Books to Scrape](http://books.toscrape.com/)
 and to extract the following things:
 1. Categories
@@ -10,7 +10,7 @@ Then it takes all the above and saves it all in separate lists within a CSV file
 It also saves the image from each product in a separate folder and organizes them by the book's category.
 
 
-#Required Setup to run the Program:
+# Required Setup to run the Program:
 
 
 1. Open your terminal.
@@ -18,7 +18,7 @@ It also saves the image from each product in a separate folder and organizes the
 3. run the following command: 
    `pip install -r requirements.txt`
    
-##Notes
+## Notes
 - The program will create all files and folders automatically in the same program directory.
 
 ## Technologies

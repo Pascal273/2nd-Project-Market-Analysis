@@ -1,8 +1,10 @@
 import csv
 import requests
+import re
 from time import sleep
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin
+from pathlib import Path
 
 
 def scrape_categories(url):
@@ -20,7 +22,7 @@ def scrape_categories(url):
                 category_links[category_name] = category_page_url
 
         except requests.exceptions.ConnectionError:
-            print("ConnectionError occurred in scrape_categories!\nWaiting 3 seconds to reconnect...")
+            print("\nConnectionError occurred in scrape_categories!\nWaiting 3 seconds to reconnect...\n")
             sleep(3)
 
     return category_links
@@ -47,7 +49,7 @@ def scrape_products(category_url):
                 category_url = ""
 
         except requests.exceptions.ConnectionError:
-            print("ConnectionError occurred in scrape_from_category!\nWaiting 3 seconds to reconnect...")
+            print("\nConnectionError occurred in scrape_products!\nWaiting 3 seconds to reconnect...\n")
             sleep(3)
 
     return product_urls
@@ -86,26 +88,46 @@ def scrape_details(product_url):
                 prod_details[keyword] = value
 
         except requests.exceptions.ConnectionError:
-            print("ConnectionError occurred in scrape_details!\nWaiting 3 seconds to reconnect...")
+            print("\nConnectionError occurred in scrape_details!\nWaiting 3 seconds to reconnect...\n")
             sleep(3)
 
     return prod_details
 
 
+def save_img(category, title, img_url):
+    img_name = re.sub('[<>:"/|?*\\\\]', '-', title)
+    img = False
+    while not img:
+        try:
+            img = requests.get(img_url)
+            with open(f"Product Images/{category}/{img_name}.jpg", "wb") as image:
+                image.write(img.content)
+        except requests.exceptions.ConnectionError:
+            img = False
+            sleep(3)
+            print("\nConnectionError occurred in save_img!\nWaiting 3 seconds to reconnect...\n")
+
+
 site_url = "https://books.toscrape.com/index.html"
+Path("Created CSV Files").mkdir(parents=True, exist_ok=True)
 categories = scrape_categories(site_url)
-print(f"\n{len(categories)} categories found...")
+total_number = len(categories)
+count = 1
 
 header = ["Title", "Product Page URL", "UPC", "Price (excl. tax)",
           "Price (incl. tax)", "Availability", "Description",
           "Category", "Review Rating", "Image URL"]
 
+print(f"\n{total_number} categories found...")
 for (cat_name, cat_link) in categories.items():
-    print(f"\nCurrent category: {cat_name}\n")
+    Path(f"Product Images/{cat_name}").mkdir(parents=True, exist_ok=True)
+    print(f"\nCategory {count} of {total_number}: {cat_name}\n")
     with open(f"Created CSV Files/{cat_name}.csv", "w", newline="", encoding="utf-8") as file:
         writer = csv.DictWriter(file, fieldnames=header)
         writer.writeheader()
         for book in scrape_products(cat_link):
             detail = scrape_details(book)
             writer.writerow({i: detail[i] for i in header})
-            print(f"{detail['Title']} analysed")
+            save_img(cat_name, detail['Title'], detail["Image URL"])
+            print(f"{detail['Title']} - done")
+    count += 1

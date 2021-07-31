@@ -130,5 +130,5 @@ for (cat_name, cat_link) in categories.items():
             detail = scrape_details(book)
             writer.writerow({i: detail[i] for i in header})
             save_img(cat_name, detail['Title'], detail["Image URL"])
-            print(f"{detail['Title']} - done")
+            print(f"{detail['Title']} ✔")
     count += 1

@@ -8,7 +8,7 @@ from pathlib import Path
 
 
 def scrape_categories(url):
-    # takes Homepage-URL and returns a Dictionary with the Category-Name as key, and the Link as value.
+    # takes homepage-URL and returns a dictionary with the category-name as key, and the link as value.
     category_links = {}
     while not category_links:
         try:
@@ -29,7 +29,7 @@ def scrape_categories(url):
 
 
 def scrape_products(category_url):
-    # takes a Category-URL and returns a list of all the product-Links from that category.
+    # takes a category-URL and returns a list of all the product-links from that category.
     product_urls = []
     while category_url != "":
         try:
@@ -56,7 +56,7 @@ def scrape_products(category_url):
 
 
 def scrape_details(product_url):
-    # takes a product-URL and returns a dictionary with all requested details.
+    # takes a product-URL and returns a dictionary with all required details.
     prod_details = {}
     while not prod_details:
         try:
@@ -95,6 +95,7 @@ def scrape_details(product_url):
 
 
 def save_img(category, title, img_url):
+    # Saves the image of the URL, named after the title, in the directory named after the category.
     img_name = re.sub('[<>:"/|?*\\\\]', '-', title)
     img = False
     while not img:

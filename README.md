@@ -7,7 +7,7 @@ and to extract the following things:
 
 Then it takes all the above and saves it all in separate lists within a CSV file (1 file for each category).
 
-It also saves the image from each product in a separate folder and organizes them by the book's category with the name of
+It also saves the image from each product and organizes them by the book's category, in a separate folder, with the name of
 the book it belongs to.
 
 
@@ -25,7 +25,7 @@ the book it belongs to.
    successfully saved.
    
 ## Notes
-- The program will create all files and folders automatically in the same program directory.
+- The program will create all files and folders automatically in the program directory.
 
 ## Technologies
 - Python version 3.9.5

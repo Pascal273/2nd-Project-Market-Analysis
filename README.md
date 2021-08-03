@@ -13,12 +13,13 @@ the book it belongs to.
 
 # Required Setup to run the program:
 
-1. Create the directory in which you want to keep the program.
-2. Open your terminal.
-3. Navigate to the folder with the main.py and requirements.txt
-4. Create your Virtual Environment by running the command: `python -m venv .venv`
-5. Activate the Environment by running: `.venv\Scripts\activate.bat` (Windows) or `source .venv/bin/activate` (OS)
-6. Install the Requirements by running the command: `pip install -r requirements.txt`
+1. Python version 3.9.5 or higher must be installed.
+2. Create the directory in which you want to keep the program.
+3. Open your terminal.
+4. Navigate to the folder with the main.py and requirements.txt
+5. Create your Virtual Environment by running the command: `python -m venv .venv`
+6. Activate the Environment by running: `.venv\Scripts\activate.bat` (Windows) or `source .venv/bin/activate` (OS)
+7. Install the Requirements by running the command: `pip install -r requirements.txt`
    
 # How to run the program:
 1. Open your terminal

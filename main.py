@@ -110,7 +110,6 @@ def save_img(category, title, img_url):
 
 
 site_url = "https://books.toscrape.com/index.html"
-Path("Created CSV Files").mkdir(parents=True, exist_ok=True)
 categories = scrape_categories(site_url)
 total_number = len(categories)
 count = 1
@@ -118,8 +117,10 @@ count = 1
 header = ["Title", "Product Page URL", "UPC", "Price (excl. tax)",
           "Price (incl. tax)", "Availability", "Description",
           "Category", "Review Rating", "Image URL"]
+# the order of the headers can be changed as desired, the Data in the CSV file will always match it.
 
 print(f"\n{total_number} categories found...")
+Path("Created CSV Files").mkdir(parents=True, exist_ok=True)
 for (cat_name, cat_link) in categories.items():
     Path(f"Product Images/{cat_name}").mkdir(parents=True, exist_ok=True)
     print(f"\nCategory {count} of {total_number}: {cat_name}\n")
